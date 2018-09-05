@@ -16,13 +16,11 @@ public class MainActivity extends Activity {
 
     private TextView taskTextView;
     private TextView timeTextView;
-    private Button startPauseButton;
-    private Button resetButton;
-    private boolean playing = false;
+    private Button startButton;
+    private Button pauseButton;
     public static final String PAUSE = "com.puntnomads.mypomodoro.PAUSE";
     Intent pause = new Intent(PAUSE);
     public static final String RESET = "com.puntnomads.mypomodoro.RESET";
-    Intent reset = new Intent(RESET);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +28,18 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         taskTextView = (TextView) findViewById(R.id.taskTextView);
         timeTextView = (TextView) findViewById(R.id.timeTextView);
-        startPauseButton = (Button) findViewById(R.id.startPauseButton);
-        resetButton = (Button) findViewById(R.id.resetButton);
-        startPauseButton.setOnClickListener(new View.OnClickListener() {
+        startButton = (Button) findViewById(R.id.startButton);
+        pauseButton = (Button) findViewById(R.id.pauseButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (playing == false) {
                     startTimer();
-                    playing = true;
-                    startPauseButton.setText("Pause");
-                } else {
-                    sendBroadcast(pause);
-                    playing = false;
-                    startPauseButton.setText("Start");
-                }
             }
         });
-        resetButton.setOnClickListener(new View.OnClickListener() {
+        pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendBroadcast(reset);
+                sendBroadcast(pause);
             }
         });
     }
